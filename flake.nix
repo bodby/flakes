@@ -17,7 +17,7 @@
       templates = {
         default.path = ./default;
         rust.path = ./rust;
-        nvim.path = ./nvim;
+        # nvim.path = ./nvim;
         typst.path = ./typst;
         # haskell.path = ./haskell;
       };
