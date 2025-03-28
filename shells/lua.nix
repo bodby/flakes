@@ -1,6 +1,6 @@
 {
   mkShell,
-  lua-langauge-server,
+  lua-language-server,
   luajitPackages,
   stylua,
   ...
@@ -8,7 +8,7 @@
 mkShell {
   name = "lua-shell";
   packages = [
-    lua-langauge-server
+    lua-language-server
     stylua
     luajitPackages.luacheck
   ];
