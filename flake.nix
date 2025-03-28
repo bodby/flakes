@@ -16,10 +16,10 @@
         f pkgs system);
     in {
       templates = {
-        default.path = ./default;
-        rust.path = ./rust;
+        default.path = ./templates/default;
+        rust.path = ./templates/rust;
         # nvim.path = ./nvim;
-        typst.path = ./typst;
+        typst.path = ./templates/typst;
         # haskell.path = ./haskell;
       };
 
