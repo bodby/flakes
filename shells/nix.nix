@@ -1,9 +1,10 @@
 {
+  name,
   mkShell,
   nixd,
   ...
 }:
 mkShell {
-  name = "nix-shell";
+  inherit name;
   packages = [ nixd ];
 }

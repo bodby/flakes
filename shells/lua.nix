@@ -1,4 +1,5 @@
 {
+  name,
   mkShell,
   lua-language-server,
   luajitPackages,
@@ -6,7 +7,7 @@
   ...
 }:
 mkShell {
-  name = "lua-shell";
+  inherit name;
   packages = [
     lua-language-server
     stylua

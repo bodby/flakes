@@ -1,4 +1,5 @@
 {
+  name,
   mkShell,
   rustPlatform,
   rustc,
@@ -9,7 +10,7 @@
   ...
 }:
 mkShell {
-  name = "rust-shell";
+  inherit name;
   RUST_SRC_PATH = "${rustPlatform.rustLibSrc}";
   packages = [
     rustc

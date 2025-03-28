@@ -5,6 +5,6 @@
   ...
 }:
 typix'.devShell {
-  name = name + "-shell";
+  inherit name;
   packages = [ tinymist ];
 }

@@ -28,14 +28,15 @@
           inherit (pkgs.lib) pipe filterAttrs hasSuffix removeSuffix mapAttrs';
           shells = pipe (builtins.readDir ./shells) [
             (filterAttrs (name: _: hasSuffix ".nix" name))
-            (mapAttrs' (name: _: {
-              name = removeSuffix ".nix" name;
-              value = pkgs.callPackage (./shells + "/${name}") { };
+            (mapAttrs' (name: _:
+              let name' = removeSuffix ".nix" name; in {
+              name = name';
+              value = pkgs.callPackage (./shells + "/${name}") { name = name'; };
             }))
           ];
         in
         shells // {
-          default = pkgs.callPackage ./shells/nix.nix { };
+          default = pkgs.callPackage ./shells/nix.nix { name = "nix"; };
         });
     };
 }

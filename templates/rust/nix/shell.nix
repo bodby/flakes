@@ -10,7 +10,7 @@
   ...
 }:
 mkShell {
-  name = pname + "-shell";
+  name = pname;
   RUST_SRC_PATH = "${rustPlatform.rustLibSrc}";
   packages = [
     rustc
