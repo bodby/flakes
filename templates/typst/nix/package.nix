@@ -1,6 +1,6 @@
 {
   typix',
-  # roboto,
+  cascadia-code,
   ...
 }:
 typix'.buildTypstProject {
@@ -8,7 +8,7 @@ typix'.buildTypstProject {
   src = typix'.cleanTypstSource ../.;
   typstOpts.format = "pdf";
   fontPaths = [
-    # "${roboto}/share/fonts/truetype"
+    "${cascadia-code}/share/fonts/truetype"
   ];
   virtualPaths = [
     # ../images
