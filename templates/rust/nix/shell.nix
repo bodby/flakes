@@ -1,5 +1,5 @@
 {
-  name,
+  pname,
   mkShell,
   rustPlatform,
   rustc,
@@ -10,7 +10,7 @@
   ...
 }:
 mkShell {
-  name = name + "-shell";
+  name = pname + "-shell";
   RUST_SRC_PATH = "${rustPlatform.rustLibSrc}";
   packages = [
     rustc

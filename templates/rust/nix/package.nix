@@ -1,12 +1,11 @@
 {
-  name,
+  pname,
   version,
   rustPlatform,
   ...
 }:
 rustPlatform.buildRustPackage {
-  inherit version;
-  pname = name;
+  inherit pname version;
   src = ./.;
   cargoLock.lockFile = ../Cargo.lock;
 }
