@@ -5,9 +5,9 @@
   outputs =
     { nixpkgs, ... }:
     let
-      inherit (cargoAttrs) version;
-      cargoAttrs = (builtins.fromTOML (builtins.readFile ./Cargo.toml)).package;
-      pname = cargoAttrs.name;
+      inherit (cargo.package) version;
+      cargo = builtins.fromTOML (builtins.readFile ./Cargo.toml);
+      pname = cargo.package.name;
       systems = [
         "x86_64-linux"
         "aarch64-linux"
