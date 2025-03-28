@@ -8,31 +8,22 @@
   };
   outputs = { typix, nixpkgs, ... }:
     let
+      name = "typst";
       systems = [
         "x86_64-linux"
         "aarch64-linux"
         "x86_64-darwin"
         "aarch64-darwin"
       ];
-      forall = f: nixpkgs.lib.genAttrs systems (system:
-        let pkgs = import nixpkgs { inherit system; };
-        in f pkgs system);
-    in {
-      packages = forall (pkgs: system:
+      call = f: nixpkgs.lib.genAttrs systems (system:
         let
+          pkgs = import nixpkgs { inherit system; };
           typix' = typix.lib.${system};
         in {
-          default = typix'.buildTypstProject {
-            typstSource = "main.typ";
-            src = typix'.cleanTypstSource ./.;
-          };
+          default = pkgs.callPackage f { inherit name typix'; };
         });
-
-      devShells = forall (pkgs: _: {
-        default = pkgs.mkShell {
-          name = "typst-shell";
-          packages = [ pkgs.tinymist ];
-        };
-      });
+    in {
+      packages = call ./nix/package.nix;
+      devShells = call ./nix/shell.nix;
     };
 }
