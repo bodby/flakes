@@ -5,8 +5,6 @@
   outputs =
     { nixpkgs, ... }:
     let
-      pname = "dummy";
-      version = "0.1.0";
       systems = [
         "x86_64-linux"
         "aarch64-linux"
@@ -15,7 +13,7 @@
       ];
       call = f: nixpkgs.lib.genAttrs systems (system:
         let pkgs = nixpkgs.legacyPackages.${system}; in {
-          default = pkgs.callPackage f { inherit pname version; };
+          default = pkgs.callPackage f { };
         });
     in {
       packages = call ./nix/package.nix;

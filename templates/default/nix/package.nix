@@ -1,13 +1,12 @@
 {
-  pname,
-  version,
   stdenvNoCC,
   lib,
   ...
 }:
 let inherit (lib.fileset) fileFilter toSource; in
 stdenvNoCC.mkDerivation {
-  inherit pname version;
+  pname = "template";
+  version = "0.1.0";
   src = toSource {
     root = ../.;
     fileset = fileFilter (file:
