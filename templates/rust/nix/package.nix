@@ -6,12 +6,12 @@
   ...
 }:
 let
-  inherit (lib.fileset) toSource unions maybeMissing fileFilter;
-  tracked = unions [
+  inherit (lib) fileset;
+  tracked = fileset.unions [
     ../src
     ../Cargo.lock
     ../Cargo.toml
-    (builtins.map maybeMissing [
+    (builtins.map fileset.maybeMissing [
       ../tests
       ../benches
       ../examples
@@ -24,9 +24,9 @@ let
 in
 rustPlatform.buildRustPackage {
   inherit pname version;
-  src = toSource {
+  src = fileset.toSource {
     root = ../.;
-    fileset = fileFilter (file:
+    fileset = fileset.fileFilter (file:
       !file.hasExt "nix" && file.name != "flake.lock" &&
       builtins.elem file.name tracked) ../.;
   };

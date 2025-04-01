@@ -4,14 +4,14 @@
   ...
 }:
 let
-  inherit (lib.fileset) fileFilter toSource;
+  inherit (lib) fileset;
 in
 stdenvNoCC.mkDerivation {
   pname = "template";
   version = "0.1.0";
-  src = toSource {
+  src = fileset.toSource {
     root = ../.;
-    fileset = fileFilter (file:
+    fileset = fileset.fileFilter (file:
       !file.hasExt "nix" && file.name != "flake.lock") ../.;
   };
   installPhase = ''

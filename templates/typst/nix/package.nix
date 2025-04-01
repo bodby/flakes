@@ -5,12 +5,7 @@
   ...
 }:
 let
-  inherit (lib.fileset)
-    fileFilter
-    toSource
-    maybeMissing
-    union
-    unions;
+  inherit (lib) fileset;
   virtualPaths = [
     # ../images
     # ../data
@@ -19,12 +14,12 @@ in
 typix'.buildTypstProject {
   inherit virtualPaths;
   typstSource = "main.typ";
-  src = toSource {
+  src = fileset.toSource {
     root = ../.;
-    fileset = union (fileFilter (file:
+    fileset = fileset.union (fileset.fileFilter (file:
       file.hasExt "typ" ||
       builtins.elem file.name [ "typst.toml" "metadata.toml" ]) ../.)
-      (unions (builtins.map maybeMissing virtualPaths));
+      (fileset.unions (builtins.map fileset.maybeMissing virtualPaths));
   };
   typstOpts.format = "pdf";
   fontPaths = [

@@ -25,11 +25,11 @@
 
       devShells = forall (pkgs: _:
         let
-          inherit (pkgs.lib) pipe filterAttrs hasSuffix removeSuffix mapAttrs';
-          shells = pipe (builtins.readDir ./shells) [
-            (filterAttrs (name: _: hasSuffix ".nix" name))
-            (mapAttrs' (name: _: {
-              name = removeSuffix ".nix" name;
+          inherit (pkgs) lib;
+          shells = lib.pipe (builtins.readDir ./shells) [
+            (lib.filterAttrs (name: _: lib.hasSuffix ".nix" name))
+            (lib.mapAttrs' (name: _: {
+              name = lib.removeSuffix ".nix" name;
               value = pkgs.callPackage (./shells + "/${name}") { };
             }))
           ];
