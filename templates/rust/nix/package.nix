@@ -1,11 +1,10 @@
 {
-  pname,
-  version,
   rustPlatform,
   lib,
 }:
 let
   inherit (lib) fileset;
+  cargoAttrs = (builtins.fromTOML (builtins.readFile ../Cargo.toml)).package;
   tracked = fileset.unions [
     ../src
     ../Cargo.lock
@@ -22,7 +21,8 @@ let
   ];
 in
 rustPlatform.buildRustPackage {
-  inherit pname version;
+  inherit (cargoAttrs) version;
+  pname = cargoAttrs.name;
   src = fileset.toSource {
     root = ../.;
     fileset = fileset.fileFilter (file:

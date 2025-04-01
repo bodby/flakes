@@ -2,12 +2,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
-  outputs =
-    { nixpkgs, ... }:
+  outputs = { nixpkgs, ... }:
     let
-      inherit (cargo.package) version;
-      cargo = builtins.fromTOML (builtins.readFile ./Cargo.toml);
-      pname = cargo.package.name;
       systems = [
         "x86_64-linux"
         "aarch64-linux"
@@ -16,7 +12,7 @@
       ];
       call = f: nixpkgs.lib.genAttrs systems (system:
         let pkgs = nixpkgs.legacyPackages.${system}; in {
-          default = pkgs.callPackage f { inherit pname version; };
+          default = pkgs.callPackage f { };
         });
     in {
       packages = call ./nix/package.nix;

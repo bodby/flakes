@@ -6,7 +6,6 @@
   rust-analyzer,
   clippy,
   rustfmt,
-  ...
 }:
 mkShellNoCC {
   name = "rust";
