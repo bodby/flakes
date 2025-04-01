@@ -14,6 +14,6 @@ stdenvNoCC.mkDerivation {
       !file.hasExt "nix" && file.name != "flake.lock") ../.;
   };
   installPhase = ''
-    cp -r $src $out
+    cp -r "$src" "$out"
   '';
 }
