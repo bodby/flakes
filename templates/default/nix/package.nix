@@ -3,7 +3,9 @@
   lib,
   ...
 }:
-let inherit (lib.fileset) fileFilter toSource; in
+let
+  inherit (lib.fileset) fileFilter toSource;
+in
 stdenvNoCC.mkDerivation {
   pname = "template";
   version = "0.1.0";
