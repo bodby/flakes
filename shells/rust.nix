@@ -1,6 +1,5 @@
 {
-  name,
-  mkShell,
+  mkShellNoCC,
   rustPlatform,
   rustc,
   cargo,
@@ -9,9 +8,12 @@
   rustfmt,
   ...
 }:
-mkShell {
-  inherit name;
-  RUST_SRC_PATH = "${rustPlatform.rustLibSrc}";
+mkShellNoCC {
+  name = "rust";
+  env = {
+    RUST_SRC_PATH = "${rustPlatform.rustLibSrc}";
+    RUST_BACKTRACE = 1;
+  };
   packages = [
     rustc
     cargo
