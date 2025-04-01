@@ -1,10 +1,9 @@
 {
-  pname,
-  mkShell,
+  mkShellNoCC,
+  nixd,
   ...
 }:
-mkShell {
-  name = pname;
-  packages = [ ];
-  inputsFrom = [ ];
+mkShellNoCC {
+  name = "nix";
+  packages = [ nixd ];
 }

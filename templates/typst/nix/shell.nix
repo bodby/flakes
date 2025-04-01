@@ -1,10 +1,9 @@
 {
-  name,
   typix',
   tinymist,
   ...
 }:
 typix'.devShell {
-  inherit name;
+  name = "typst";
   packages = [ tinymist ];
 }

@@ -15,7 +15,7 @@
         "aarch64-darwin"
       ];
       call = f: nixpkgs.lib.genAttrs systems (system:
-        let pkgs = import nixpkgs { inherit system; }; in {
+        let pkgs = nixpkgs.legacyPackages.${system}; in {
           default = pkgs.callPackage f { inherit pname version; };
         });
     in {

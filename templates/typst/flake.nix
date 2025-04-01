@@ -8,7 +8,6 @@
   };
   outputs = { typix, nixpkgs, ... }:
     let
-      name = "typst";
       systems = [
         "x86_64-linux"
         "aarch64-linux"
@@ -17,10 +16,10 @@
       ];
       call = f: nixpkgs.lib.genAttrs systems (system:
         let
-          pkgs = import nixpkgs { inherit system; };
+          pkgs = nixpkgs.legacyPackages.${system};
           typix' = typix.lib.${system};
         in {
-          default = pkgs.callPackage f { inherit name typix'; };
+          default = pkgs.callPackage f { inherit typix'; };
         });
     in {
       packages = call ./nix/package.nix;
