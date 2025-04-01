@@ -3,7 +3,6 @@
   version,
   rustPlatform,
   lib,
-  ...
 }:
 let
   inherit (lib) fileset;

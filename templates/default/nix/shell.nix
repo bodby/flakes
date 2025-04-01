@@ -1,7 +1,6 @@
 {
   mkShellNoCC,
   nixd,
-  ...
 }:
 mkShellNoCC {
   name = "nix";

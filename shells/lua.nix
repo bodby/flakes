@@ -4,7 +4,6 @@
   lua-language-server,
   luajitPackages,
   stylua,
-  ...
 }:
 mkShellNoCC {
   name = "lua-jit";

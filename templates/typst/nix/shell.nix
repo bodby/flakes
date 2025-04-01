@@ -1,7 +1,6 @@
 {
   typix',
   tinymist,
-  ...
 }:
 typix'.devShell {
   name = "typst";

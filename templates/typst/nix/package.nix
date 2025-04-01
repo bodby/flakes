@@ -2,7 +2,6 @@
   typix',
   lib,
   cascadia-code,
-  ...
 }:
 let
   inherit (lib) fileset;
