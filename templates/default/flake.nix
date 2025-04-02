@@ -15,7 +15,7 @@
           default = pkgs.callPackage f { };
         });
     in {
-      packages = call ./nix/package.nix;
+      packages = call ./nix/default.nix;
       devShells = call ./nix/shell.nix;
     };
 }

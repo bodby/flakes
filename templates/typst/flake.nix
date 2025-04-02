@@ -22,7 +22,7 @@
           default = pkgs.callPackage f { inherit typix'; };
         });
     in {
-      packages = call ./nix/package.nix;
+      packages = call ./nix/default.nix;
       devShells = call ./nix/shell.nix;
     };
 }
