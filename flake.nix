@@ -25,15 +25,14 @@
       devShells = forall (pkgs:
         let
           inherit (pkgs) lib callPackage;
-          shells = lib.pipe (builtins.readDir ./shells) [
-            (lib.filterAttrs (name: _: lib.hasSuffix ".nix" name))
-            (lib.mapAttrs' (name: _: {
-              name = lib.removeSuffix ".nix" name;
-              value = callPackage (./shells + "/${name}") { };
-            }))
-          ];
         in
-        shells // {
+        lib.pipe (builtins.readDir ./shells) [
+          (lib.filterAttrs (name: _: lib.hasSuffix ".nix" name))
+          (lib.mapAttrs' (name: _: {
+            name = lib.removeSuffix ".nix" name;
+            value = callPackage (./shells + "/${name}") { };
+          }))
+        ] // {
           default = callPackage ./shells/nix.nix { };
         });
     };
