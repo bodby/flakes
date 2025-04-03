@@ -9,6 +9,7 @@ let
     ../src
     ../Cargo.lock
     ../Cargo.toml
+    # FIXME: Flatten because this is a list inside a list.
     (builtins.map fileset.maybeMissing [
       ../tests
       ../benches
