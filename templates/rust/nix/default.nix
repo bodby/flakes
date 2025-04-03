@@ -6,6 +6,7 @@ let
   inherit (lib) fileset;
   toml = (lib.importTOML ../Cargo.toml).package;
   # TODO: Are the optional filesets ever used?
+  #       See buildRustPackage source.
   tracked = fileset.unions ([
     ../src
     ../Cargo.lock
