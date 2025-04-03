@@ -10,10 +10,11 @@
         "x86_64-darwin"
         "aarch64-darwin"
       ];
-      call = f: nixpkgs.lib.genAttrs systems (system:
-        let pkgs = nixpkgs.legacyPackages.${system}; in {
-          default = pkgs.callPackage f { };
-        });
+      forall = fn: nixpkgs.lib.genAttrs systems (system:
+        fn nixpkgs.legacyPackages.${system});
+      call = file: forall (pkgs: {
+        default = pkgs.callPackage file { };
+      });
     in {
       packages = call ./nix/default.nix;
       devShells = call ./nix/shell.nix;

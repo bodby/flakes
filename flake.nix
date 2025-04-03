@@ -10,9 +10,8 @@
         "x86_64-darwin"
         "aarch64-darwin"
       ];
-      forall = f: nixpkgs.lib.genAttrs systems (system:
-        let pkgs = nixpkgs.legacyPackages.${system}; in
-        f pkgs);
+      forall = fn: nixpkgs.lib.genAttrs systems (system:
+        fn nixpkgs.legacyPackages.${system});
     in {
       templates = {
         default.path = ./templates/default;

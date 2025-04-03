@@ -5,21 +5,12 @@
 let
   inherit (lib) fileset;
   toml = (lib.importTOML ../Cargo.toml).package;
-  # TODO: Are the optional filesets ever used?
-  #       See buildRustPackage source.
-  tracked = fileset.unions ([
+  tracked = fileset.unions [
     ../src
     ../Cargo.lock
     ../Cargo.toml
-  ] ++ (builtins.map fileset.maybeMissing [
-    ../tests
-    ../benches
-    ../examples
-    ../rustfmt.toml
-    ../clippy.toml
-    ../rust-toolchain.toml
-    ../build.rs
-  ]));
+    (fileset.maybeMissing ../build.rs)
+  ];
 in
 rustPlatform.buildRustPackage {
   inherit (toml) version;

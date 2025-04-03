@@ -14,13 +14,11 @@
         "x86_64-darwin"
         "aarch64-darwin"
       ];
-      call = f: nixpkgs.lib.genAttrs systems (system:
-        let
-          pkgs = nixpkgs.legacyPackages.${system};
-          typix' = typix.lib.${system};
-        in {
-          default = pkgs.callPackage f { inherit typix'; };
-        });
+      forall = fn: nixpkgs.lib.genAttrs systems (system:
+        fn nixpkgs.legacyPackages.${system} system);
+      call = file: forall (pkgs: system: {
+        default = pkgs.callPackage file { typix' = typix.lib.${system}; };
+      });
     in {
       packages = call ./nix/default.nix;
       devShells = call ./nix/shell.nix;
