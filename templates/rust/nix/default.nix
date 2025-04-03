@@ -5,21 +5,20 @@
 let
   inherit (lib) fileset;
   toml = (lib.importTOML ../Cargo.toml).package;
-  tracked = fileset.unions [
+  # TODO: Are the optional filesets ever used?
+  tracked = fileset.unions ([
     ../src
     ../Cargo.lock
     ../Cargo.toml
-    # FIXME: Flatten because this is a list inside a list.
-    (builtins.map fileset.maybeMissing [
-      ../tests
-      ../benches
-      ../examples
-      ../rustfmt.toml
-      ../clippy.toml
-      ../rust-toolchain.toml
-      ../build.rs
-    ])
-  ];
+  ] ++ (builtins.map fileset.maybeMissing [
+    ../tests
+    ../benches
+    ../examples
+    ../rustfmt.toml
+    ../clippy.toml
+    ../rust-toolchain.toml
+    ../build.rs
+  ]));
 in
 rustPlatform.buildRustPackage {
   inherit (toml) version;
