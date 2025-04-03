@@ -10,7 +10,7 @@
 mkShellNoCC {
   name = "rust";
   env = {
-    RUST_SRC_PATH = "${rustPlatform.rustLibSrc}";
+    RUST_SRC_PATH = rustPlatform.rustLibSrc;
     RUST_BACKTRACE = 1;
   };
   packages = [
