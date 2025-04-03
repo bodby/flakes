@@ -18,7 +18,7 @@ typix'.buildTypstProject {
     fileset = fileset.union (fileset.fileFilter (file:
       file.hasExt "typ" ||
       builtins.elem file.name [ "typst.toml" "metadata.toml" ]) ../.)
-      (fileset.unions (builtins.map fileset.maybeMissing virtualPaths));
+      (fileset.unions virtualPaths);
   };
   typstOpts.format = "pdf";
   fontPaths = [
