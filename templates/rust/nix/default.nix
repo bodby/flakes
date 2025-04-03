@@ -4,7 +4,7 @@
 }:
 let
   inherit (lib) fileset;
-  cargoAttrs = (builtins.fromTOML (builtins.readFile ../Cargo.toml)).package;
+  toml = (lib.importTOML ../Cargo.toml).package;
   tracked = fileset.unions [
     ../src
     ../Cargo.lock
@@ -21,13 +21,12 @@ let
   ];
 in
 rustPlatform.buildRustPackage {
-  inherit (cargoAttrs) version;
-  pname = cargoAttrs.name;
+  inherit (toml) version;
+  pname = toml.name;
   src = fileset.toSource {
     root = ../.;
-    fileset = fileset.fileFilter (file:
-      !file.hasExt "nix" && file.name != "flake.lock" &&
-      builtins.elem file.name tracked) ../.;
+    fileset = fileset.intersection (fileset.fileFilter (file:
+      !file.hasExt "nix" && file.name != "flake.lock") ../.) tracked;
   };
   cargoLock.lockFile = ../Cargo.lock;
 }
