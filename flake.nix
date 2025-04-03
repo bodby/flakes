@@ -12,7 +12,7 @@
       ];
       forall = f: nixpkgs.lib.genAttrs systems (system:
         let pkgs = nixpkgs.legacyPackages.${system}; in
-        f pkgs system);
+        f pkgs);
     in {
       templates = {
         default.path = ./templates/default;
@@ -22,7 +22,7 @@
         # haskell.path = ./haskell;
       };
 
-      devShells = forall (pkgs: _:
+      devShells = forall (pkgs:
         let
           inherit (pkgs) lib;
           shells = lib.pipe (builtins.readDir ./shells) [
