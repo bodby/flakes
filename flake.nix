@@ -16,9 +16,9 @@
       templates = {
         default.path = ./templates/default;
         rust.path = ./templates/rust;
-        # nvim.path = ./nvim;
+        # nvim.path = ./templates/nvim;
         typst.path = ./templates/typst;
-        # haskell.path = ./haskell;
+        haskell.path = ./templates/haskell;
       };
 
       devShells = forall (pkgs:

@@ -1,0 +1,13 @@
+result
+result-*
+dist
+dist-*
+cabal-dev
+*.o
+*.hi
+*.hie
+.hpc
+.hsenv
+cabal.project.local
+cabal.project.local~
+.DS_Store
