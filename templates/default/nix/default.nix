@@ -11,7 +11,9 @@ stdenvNoCC.mkDerivation {
   src = fileset.toSource {
     root = ../.;
     fileset = fileset.fileFilter (file:
-      !file.hasExt "nix" && file.name != "flake.lock") ../.;
+      !file.hasExt "nix" &&
+      file.name != "flake.lock" &&
+      file.type == "regular") ../.;
   };
   installPhase = ''
     cp -r "$src" "$out"
