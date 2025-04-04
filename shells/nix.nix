@@ -1,8 +1,14 @@
 {
   mkShellNoCC,
   nixd,
+  statix,
+  nurl,
 }:
 mkShellNoCC {
   name = "nix";
-  packages = [ nixd ];
+  packages = [
+    nixd
+    statix
+    nurl
+  ];
 }
