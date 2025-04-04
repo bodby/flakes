@@ -1,9 +1,9 @@
 {
   haskellPackages,
   ghc,
+  cabal-install,
   haskell-language-server,
   hlint,
-  cabal-install,
   ormolu,
 }:
 haskellPackages.shellFor {
