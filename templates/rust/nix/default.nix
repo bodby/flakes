@@ -1,6 +1,6 @@
 {
-  rustPlatform,
   lib,
+  rustPlatform,
 }:
 let
   inherit (lib) fileset;

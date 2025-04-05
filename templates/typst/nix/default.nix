@@ -1,6 +1,6 @@
 {
-  typix',
   lib,
+  typix',
   cascadia-code,
 }:
 let

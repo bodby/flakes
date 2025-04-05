@@ -1,6 +1,6 @@
 {
-  stdenvNoCC,
   lib,
+  stdenvNoCC,
 }:
 let
   inherit (lib) fileset;

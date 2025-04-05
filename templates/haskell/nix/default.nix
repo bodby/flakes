@@ -1,6 +1,6 @@
 {
-  haskellPackages,
   lib,
+  haskellPackages,
 }:
 let
   inherit (lib) fileset;
