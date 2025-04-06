@@ -1,7 +1,4 @@
-{
-  lib,
-  rustPlatform,
-}:
+{ lib, rustPlatform }:
 let
   inherit (lib) fileset;
   toml = (lib.importTOML ../Cargo.toml).package;

@@ -1,7 +1,4 @@
-{
-  lib,
-  haskellPackages,
-}:
+{ lib, haskellPackages }:
 let
   inherit (lib) fileset;
   tracked = fileset.unions [

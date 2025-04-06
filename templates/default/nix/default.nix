@@ -1,7 +1,4 @@
-{
-  lib,
-  stdenvNoCC,
-}:
+{ lib, stdenvNoCC }:
 let
   inherit (lib) fileset;
   tracked = fileset.unions [

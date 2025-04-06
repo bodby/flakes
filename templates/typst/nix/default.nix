@@ -1,7 +1,7 @@
 {
   lib,
   typix',
-  cascadia-code,
+  cascadia-code
 }:
 let
   inherit (lib) fileset;
