@@ -10,7 +10,7 @@
         "x86_64-darwin"
         "aarch64-darwin"
       ];
-      forall = fn: nixpkgs.lib.genAttrs systems (system:
+      forall = fn: nixpkgs.lib.attrsets.genAttrs systems (system:
         fn nixpkgs.legacyPackages.${system});
     in {
       templates = {
@@ -25,10 +25,11 @@
         let
           inherit (pkgs) lib callPackage;
         in
-        lib.pipe (builtins.readDir ./shells) [
-          (lib.filterAttrs (name: _: lib.hasSuffix ".nix" name))
-          (lib.mapAttrs' (name: _: {
-            name = lib.removeSuffix ".nix" name;
+        lib.trivial.pipe (builtins.readDir ./shells) [
+          (lib.attrsets.filterAttrs (name: _:
+            lib.strings.hasSuffix ".nix" name))
+          (lib.attrsets.mapAttrs' (name: _: {
+            name = lib.strings.removeSuffix ".nix" name;
             value = callPackage (./shells + "/${name}") { };
           }))
         ] // {

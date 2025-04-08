@@ -1,7 +1,7 @@
 { lib, rustPlatform }:
 let
   inherit (lib) fileset;
-  toml = (lib.importTOML ../Cargo.toml).package;
+  toml = (lib.trivial.importTOML ../Cargo.toml).package;
   tracked = fileset.unions [
     ../src
     ../Cargo.lock
