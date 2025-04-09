@@ -16,8 +16,8 @@ typix'.buildTypstProject {
   src = fileset.toSource {
     root = ../.;
     fileset = fileset.union (fileset.fileFilter (file:
-      file.hasExt "typ" ||
-      builtins.elem file.name [ "typst.toml" "metadata.toml" ]) ../.)
+      file.hasExt "typ"
+      || builtins.elem file.name [ "typst.toml" "metadata.toml" ]) ../.)
       (fileset.unions virtualPaths);
   };
   typstOpts.format = "pdf";
