@@ -1,10 +1,10 @@
 {
   inputs = {
     typix = {
-      url = "github:loqusion/typix";
+      url = "git+https://github.com/loqusion/typix?shallow=1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "git+https://github.com/NixOS/nixpkgs?shallow=1&ref=nixos-unstable";
   };
   outputs = { typix, nixpkgs, ... }:
     let
