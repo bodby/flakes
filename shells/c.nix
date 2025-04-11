@@ -1,9 +1,9 @@
 {
-  mkShellNoCC,
+  mkShell,
   clang-tools,
   cppcheck,
 }:
-mkShellNoCC {
+mkShell {
   name = "c";
   packages = [
     clang-tools
