@@ -1,7 +1,7 @@
 {
   inputs = {
     typix = {
-      url = "git+https://github.com/loqusion/typix?shallow=1";
+      url = "git+https://github.com/loqusion/typix?shallow=1?ref=main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "git+https://github.com/NixOS/nixpkgs?shallow=1&ref=nixos-unstable";

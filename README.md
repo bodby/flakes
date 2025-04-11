@@ -12,8 +12,8 @@ Add this repo as a flake input to your NixOS configuration:
   inputs = {
     # Use either the GitHub or Codeberg repo.
     flakes = {
-      url = "git+https://github.com/bodby/weeee?shallow=1";
-      url = "git+https://codeberg.org/bodby/weeee?shallow=1";
+      url = "git+https://github.com/bodby/flakes?shallow=1?ref=master";
+      url = "git+https://codeberg.org/bodby/flakes?shallow=1?ref=master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "git+https://github.com/NixOS/nixpkgs?shallow=1&ref=nixos-unstable";
