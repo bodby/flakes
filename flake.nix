@@ -19,6 +19,7 @@
         # nvim.path = ./templates/nvim;
         typst.path = ./templates/typst;
         haskell.path = ./templates/haskell;
+        nixosModule.path = ./templates/nixos;
       };
 
       devShells = forall (pkgs:
