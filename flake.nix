@@ -31,7 +31,7 @@
             lib.strings.hasSuffix ".nix" name))
           (lib.attrsets.mapAttrs' (name: _: {
             name = lib.strings.removeSuffix ".nix" name;
-            value = callPackage (./shells + "/${name}") { };
+            value = callPackage (./shells/${name}) { };
           }))
         ] // {
           default = callPackage ./shells/nix.nix { };
