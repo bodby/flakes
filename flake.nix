@@ -25,12 +25,13 @@
       devShells = forall (pkgs:
         let
           inherit (pkgs) lib callPackage;
+          inherit (lib) attrsets strings;
         in
         lib.trivial.pipe (builtins.readDir ./shells) [
-          (lib.attrsets.filterAttrs (name: _:
-            lib.strings.hasSuffix ".nix" name))
-          (lib.attrsets.mapAttrs' (name: _: {
-            name = lib.strings.removeSuffix ".nix" name;
+          (attrsets.filterAttrs (name: _:
+            strings.hasSuffix ".nix" name))
+          (attrsets.mapAttrs' (name: _: {
+            name = strings.removeSuffix ".nix" name;
             value = callPackage (./shells/${name}) { };
           }))
         ] // {
