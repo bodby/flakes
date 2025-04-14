@@ -1,5 +1,5 @@
 {
-  mkShellNoCC,
+  mkShell,
   rustPlatform,
   rustc,
   cargo,
@@ -7,7 +7,7 @@
   clippy,
   rustfmt,
 }:
-mkShellNoCC {
+mkShell {
   name = "rust";
   env = {
     RUST_SRC_PATH = rustPlatform.rustLibSrc;
