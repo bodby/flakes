@@ -14,8 +14,8 @@
         "x86_64-darwin"
         "aarch64-darwin"
       ];
-      forall = fn: nixpkgs.lib.attrsets.genAttrs systems (system:
-        fn nixpkgs.legacyPackages.${system} system);
+      forall = f: nixpkgs.lib.genAttrs systems (system:
+        f nixpkgs.legacyPackages.${system} system);
       call = file: forall (pkgs: system: {
         default = pkgs.callPackage file { typix' = typix.lib.${system}; };
       });
