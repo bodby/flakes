@@ -6,7 +6,7 @@
   luajitPackages,
 }:
 mkShellNoCC {
-  name = "lua-jit";
+  name = "luajit";
   packages = [
     luajit
     lua-language-server
