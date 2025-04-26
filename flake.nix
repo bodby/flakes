@@ -10,28 +10,51 @@
         "x86_64-darwin"
         "aarch64-darwin"
       ];
-      forall = fn: nixpkgs.lib.attrsets.genAttrs systems (system:
-        fn nixpkgs.legacyPackages.${system});
+      forall = f: nixpkgs.lib.genAttrs systems (system:
+        f nixpkgs.legacyPackages.${system});
     in {
       templates = {
-        default.path = ./templates/default;
-        rust.path = ./templates/rust;
-        # nvim.path = ./templates/nvim;
-        typst.path = ./templates/typst;
-        haskell.path = ./templates/haskell;
-        nixosModule.path = ./templates/nixos;
+        default = {
+          path = ./templates/default;
+          description = "Opinionated Nix boilerplate";
+        };
+        rust = {
+          path = ./templates/rust;
+          description = "Rust project using Cargo";
+          welcomeText = ''
+            Don't forget to specify a license in `Cargo.toml`.
+          '';
+        };
+        # nvim = {
+        #   path = ./templates/nvim;
+        #   description = "Neovim plugin";
+        # };
+        typst = {
+          path = ./templates/typst;
+          description = "Typst document using Typix";
+        };
+        haskell = {
+          path = ./templates/haskell;
+          description = "Haskell project using Cabal";
+          welcomeText = ''
+            Don't forget to specify a license in `haskell.cabal`.
+          '';
+        };
+        nixos = {
+          path = ./templates/nixos;
+          description = "NixOS module";
+        };
       };
 
       devShells = forall (pkgs:
         let
           inherit (pkgs) lib callPackage;
-          inherit (lib) attrsets strings;
         in
-        lib.trivial.pipe (builtins.readDir ./shells) [
-          (attrsets.filterAttrs (name: _:
-            strings.hasSuffix ".nix" name))
-          (attrsets.mapAttrs' (name: _: {
-            name = strings.removeSuffix ".nix" name;
+        lib.pipe (builtins.readDir ./shells) [
+          (lib.filterAttrs (name: _:
+            lib.hasSuffix ".nix" name))
+          (lib.mapAttrs' (name: _: {
+            name = lib.removeSuffix ".nix" name;
             value = callPackage ./shells/${name} { };
           }))
         ] // {
