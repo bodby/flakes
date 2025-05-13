@@ -24,9 +24,6 @@
         rust = {
           path = ./templates/rust;
           description = "Rust project using Cargo";
-          welcomeText = ''
-            Don't forget to specify a license in `Cargo.toml`.
-          '';
         };
 
         # nvim = {
@@ -42,9 +39,6 @@
         haskell = {
           path = ./templates/haskell;
           description = "Haskell project using Cabal";
-          welcomeText = ''
-            Don't forget to specify a license in `haskell.cabal`.
-          '';
         };
 
         nixos = {

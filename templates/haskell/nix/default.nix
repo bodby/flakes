@@ -1,11 +1,11 @@
 { lib, haskellPackages }:
 let
   inherit (lib) fileset;
+  name = "haskell";
   tracked = fileset.unions [
-    ../src
-    ../app
-    ../test
-    ../haskell.cabal
+    (fileset.maybeMissing ../src)
+    (fileset.maybeMissing ../app)
+    ../${name}.cabal
   ];
 
   src = fileset.toSource {
@@ -16,4 +16,4 @@ let
       && file.type == "regular") ../.) tracked;
   };
 in
-haskellPackages.callCabal2nix "haskell" src { }
+haskellPackages.callCabal2nix name src { }
