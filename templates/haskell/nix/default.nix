@@ -7,6 +7,7 @@ let
     ../test
     ../haskell.cabal
   ];
+
   src = fileset.toSource {
     root = ../.;
     fileset = fileset.intersection (fileset.fileFilter (file:

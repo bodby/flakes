@@ -9,10 +9,6 @@
 }:
 mkShell {
   name = "rust";
-  env = {
-    RUST_SRC_PATH = rustPlatform.rustLibSrc;
-    RUST_BACKTRACE = 1;
-  };
   packages = [
     rustc
     cargo
@@ -20,4 +16,9 @@ mkShell {
     clippy
     rustfmt
   ];
+
+  env = {
+    RUST_SRC_PATH = rustPlatform.rustLibSrc;
+    RUST_BACKTRACE = 1;
+  };
 }

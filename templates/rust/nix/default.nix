@@ -2,6 +2,7 @@
 let
   inherit (lib) fileset;
   toml = (lib.importTOML ../Cargo.toml).package;
+
   tracked = fileset.unions [
     ../src
     ../Cargo.lock
@@ -19,5 +20,8 @@ rustPlatform.buildRustPackage {
       && file.name != "flake.lock"
       && file.type == "regular") ../.) tracked;
   };
-  cargoLock.lockFile = ../Cargo.lock;
+
+  cargoLock = {
+    lockFile = ../Cargo.lock;
+  };
 }

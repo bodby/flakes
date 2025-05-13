@@ -12,7 +12,6 @@ let
 in
 typix'.buildTypstProject {
   inherit virtualPaths;
-  typstSource = "main.typ";
   src = fileset.toSource {
     root = ../.;
     fileset = fileset.union (fileset.fileFilter (file:
@@ -20,7 +19,12 @@ typix'.buildTypstProject {
       || builtins.elem file.name [ "typst.toml" "metadata.toml" ]) ../.)
       (fileset.unions virtualPaths);
   };
-  typstOpts.format = "pdf";
+
+  typstSource = "main.typ";
+  typstOpts = {
+    format = "pdf";
+  };
+
   fontPaths = [
     "${cascadia-code}/share/fonts/truetype"
   ];

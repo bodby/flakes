@@ -1,6 +1,8 @@
 {
-  inputs = { };
   outputs = _: {
-    nixosModules.default = ./.;
+    nixosModules = {
+      default = ./.;
+      named = ./.;
+    };
   };
 }

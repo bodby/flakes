@@ -11,6 +11,7 @@ haskellPackages.shellFor {
   packages = p: [
     (p.callPackage ./default.nix { })
   ];
+
   nativeBuildInputs = [
     ghc
     cabal-install
