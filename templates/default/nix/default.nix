@@ -15,7 +15,10 @@ stdenvNoCC.mkDerivation {
       && file.name != "flake.lock"
       && file.type == "regular") ../.) tracked;
   };
+
   installPhase = ''
+    runHook preInstall
     cp -r "$src" "$out"
+    runHook postInstall
   '';
 }
