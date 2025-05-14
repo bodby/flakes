@@ -36,10 +36,10 @@
           description = "Typst document using Typix";
         };
 
-        haskell = {
-          path = ./templates/haskell;
-          description = "Haskell project using Cabal";
-        };
+        # haskell = {
+        #   path = ./templates/haskell;
+        #   description = "Haskell project using Cabal";
+        # };
 
         nixos = {
           path = ./templates/nixos;
