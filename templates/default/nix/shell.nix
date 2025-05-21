@@ -1,7 +1,7 @@
 {
   mkShellNoCC,
   nixd,
-  nixfmt,
+  nixfmt-rfc-style,
   statix,
   nurl,
 }:
@@ -9,7 +9,7 @@ mkShellNoCC {
   name = "nix";
   packages = [
     nixd
-    nixfmt
+    nixfmt-rfc-style
     statix
     nurl
   ];
