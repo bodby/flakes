@@ -4,8 +4,8 @@
   rustc,
   cargo,
   rust-analyzer,
-  clippy,
   rustfmt,
+  clippy,
 }:
 mkShell {
   name = "rust";
@@ -13,8 +13,8 @@ mkShell {
     rustc
     cargo
     rust-analyzer
-    clippy
     rustfmt
+    clippy
   ];
 
   env = {

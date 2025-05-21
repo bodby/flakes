@@ -3,8 +3,8 @@
   ghc,
   cabal-install,
   haskell-language-server,
-  hlint,
   ormolu,
+  hlint,
 }:
 haskellPackages.shellFor {
   name = "haskell";
@@ -13,7 +13,7 @@ haskellPackages.shellFor {
     ghc
     cabal-install
     haskell-language-server
-    hlint
     ormolu
+    hlint
   ];
 }
