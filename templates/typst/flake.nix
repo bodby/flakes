@@ -7,7 +7,8 @@
     };
   };
 
-  outputs = { nixpkgs, typix, ... }:
+  outputs =
+    { nixpkgs, typix, ... }:
     let
       systems = [
         "x86_64-linux"
@@ -16,12 +17,16 @@
         "aarch64-darwin"
       ];
 
-      forall = f: nixpkgs.lib.genAttrs systems (system:
-        f nixpkgs.legacyPackages.${system} system);
-      call = file: forall (pkgs: system: {
-        default = pkgs.callPackage file { typix' = typix.lib.${system}; };
-      });
-    in {
+      forall = f: nixpkgs.lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system} system);
+      call =
+        file:
+        forall (
+          pkgs: system: {
+            default = pkgs.callPackage file { typix' = typix.lib.${system}; };
+          }
+        );
+    in
+    {
       packages = call ./nix/default.nix;
       devShells = call ./nix/shell.nix;
     };

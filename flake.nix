@@ -3,7 +3,8 @@
     nixpkgs.url = "git+https://github.com/NixOS/nixpkgs?shallow=1&ref=nixos-unstable";
   };
 
-  outputs = { nixpkgs, ... }:
+  outputs =
+    { nixpkgs, ... }:
     let
       systems = [
         "x86_64-linux"
@@ -12,9 +13,9 @@
         "aarch64-darwin"
       ];
 
-      forall = f: nixpkgs.lib.genAttrs systems (system:
-        f nixpkgs.legacyPackages.${system});
-    in {
+      forall = f: nixpkgs.lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
+    in
+    {
       templates = {
         default = {
           path = ./templates/default;
@@ -47,19 +48,24 @@
         };
       };
 
-      devShells = forall (pkgs:
+      formatter = forall (pkgs: pkgs.nixfmt-tree);
+      devShells = forall (
+        pkgs:
         let
           inherit (pkgs) lib callPackage;
         in
         lib.pipe (builtins.readDir ./shells) [
-          (lib.filterAttrs (name: _:
-            lib.hasSuffix ".nix" name))
-          (lib.mapAttrs' (name: _: {
-            name = lib.removeSuffix ".nix" name;
-            value = callPackage ./shells/${name} { };
-          }))
-        ] // {
+          (lib.filterAttrs (name: _: lib.hasSuffix ".nix" name))
+          (lib.mapAttrs' (
+            name: _: {
+              name = lib.removeSuffix ".nix" name;
+              value = callPackage ./shells/${name} { };
+            }
+          ))
+        ]
+        // {
           default = callPackage ./shells/nix.nix { };
-        });
+        }
+      );
     };
 }

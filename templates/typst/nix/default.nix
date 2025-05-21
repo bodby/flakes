@@ -14,10 +14,14 @@ typix'.buildTypstProject {
   inherit virtualPaths;
   src = fileset.toSource {
     root = ../.;
-    fileset = fileset.union (fileset.fileFilter (file:
+    fileset = fileset.union (fileset.fileFilter (
+      file:
       file.hasExt "typ"
-      || builtins.elem file.name [ "typst.toml" "metadata.toml" ]) ../.)
-      (fileset.unions virtualPaths);
+      || builtins.elem file.name [
+        "typst.toml"
+        "metadata.toml"
+      ]
+    ) ../.) (fileset.unions virtualPaths);
   };
 
   typstSource = "main.typ";

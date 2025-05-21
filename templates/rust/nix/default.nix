@@ -15,10 +15,9 @@ rustPlatform.buildRustPackage {
   pname = toml.name;
   src = fileset.toSource {
     root = ../.;
-    fileset = fileset.intersection (fileset.fileFilter (file:
-      !file.hasExt "nix"
-      && file.name != "flake.lock"
-      && file.type == "regular") ../.) tracked;
+    fileset = fileset.intersection (fileset.fileFilter (
+      file: !file.hasExt "nix" && file.name != "flake.lock" && file.type == "regular"
+    ) ../.) tracked;
   };
 
   cargoLock = {
