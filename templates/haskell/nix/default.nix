@@ -3,9 +3,9 @@ let
   inherit (builtins) attrValues;
   pkgs' = import ./overrides.nix haskellPackages;
 
-  inherit (lib) fileset;
   name = "haskell";
 
+  inherit (lib) fileset;
   sources = fileset.unions [
     ../${name}.cabal
     (fileset.maybeMissing ../app)
