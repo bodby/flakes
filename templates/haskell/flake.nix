@@ -13,14 +13,7 @@
         "aarch64-darwin"
       ];
 
-      pkgs =
-        system:
-        import nixpkgs {
-          inherit system;
-          config = import ./nix/overrides.nix;
-        };
-
-      forSystems = f: nixpkgs.lib.genAttrs systems (system: f (pkgs system));
+      forSystems = f: nixpkgs.lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
       call =
         file:
         forSystems (pkgs: {
