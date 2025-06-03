@@ -1,12 +1,11 @@
 {
-  shellFor,
+  haskellPackages,
   cabal-install,
   haskell-language-server,
   ormolu,
-  cabal-fmt,
   cabal2nix,
 }:
-shellFor {
+haskellPackages.shellFor {
   name = "haskell";
 
   packages = p: [
@@ -17,7 +16,7 @@ shellFor {
     cabal-install
     haskell-language-server
     ormolu
-    cabal-fmt
+    haskellPackages.cabal-fmt
     cabal2nix
   ];
 }

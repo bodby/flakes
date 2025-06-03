@@ -17,7 +17,7 @@
       call =
         file:
         forSystems (pkgs: {
-          default = pkgs.haskellPackages.callPackage file { };
+          default = pkgs.callPackage file { };
         });
     in
     {

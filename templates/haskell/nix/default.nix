@@ -1,7 +1,7 @@
-{ lib, mkDerivation }@pkgs:
+{ lib, haskellPackages }:
 let
   inherit (builtins) attrValues;
-  pkgs' = import ./overrides.nix pkgs;
+  pkgs' = import ./overrides.nix haskellPackages;
 
   inherit (lib) fileset;
   name = "haskell";
@@ -12,7 +12,7 @@ let
     (fileset.maybeMissing ../src)
   ];
 in
-mkDerivation {
+haskellPackages.mkDerivation {
   pname = name;
   version = "0.1.0.0";
 
