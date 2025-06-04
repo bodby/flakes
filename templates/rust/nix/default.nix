@@ -1,8 +1,8 @@
 { lib, rustPlatform }:
 let
-  inherit (lib) fileset;
   toml = (lib.importTOML ../Cargo.toml).package;
 
+  inherit (lib) fileset;
   sources = fileset.unions [
     ../Cargo.toml
     ../Cargo.lock

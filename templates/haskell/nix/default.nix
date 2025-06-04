@@ -1,7 +1,13 @@
 { lib, haskellPackages }:
 let
   inherit (builtins) attrValues;
-  pkgs' = import ./overrides.nix haskellPackages;
+
+  # If you ever get version mismatches, add cabal2nix overrides here.
+  pkgs' = haskellPackages.override {
+    overrides = final: _: {
+      # directory = final.callPackage ./generated/directory.nix { };
+    };
+  };
 
   name = "haskell";
 
