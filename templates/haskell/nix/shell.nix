@@ -16,7 +16,7 @@ haskellPackages.shellFor {
     cabal-install
     haskell-language-server
     ormolu
-    haskellPackages.cabal-fmt
+    haskellPackages.cabal-gild
     cabal2nix
   ];
 }
