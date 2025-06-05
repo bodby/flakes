@@ -1,0 +1,8 @@
+result
+result-*
+dist
+dist-*
+cabal-dev
+*.o
+*.hi
+*.hie

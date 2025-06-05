@@ -36,18 +36,19 @@
           path = ./templates/rust;
           description = "Rust project using Cargo";
         };
-
-        # typst = {
-        #   path = ./templates/typst;
-        #   description = "Typst document";
-        # };
       };
 
-      devShells = forSystems (pkgs: {
-        default = pkgs.callPackage ./shells/nix.nix { };
-        lua = pkgs.callPackage ./shells/lua.nix { };
-        nix = pkgs.callPackage ./shells/nix.nix { };
-        rust = pkgs.callPackage ./shells/rust.nix { };
-      });
+      devShells = forSystems (
+        pkgs:
+        let
+          f = builtins.mapAttrs (_: v: pkgs.callPackage v { });
+        in
+        f {
+          default = ./shells/nix.nix;
+          lua = ./shells/lua.nix;
+          nix = ./shells/nix.nix;
+          rust = ./shells/rust.nix;
+        }
+      );
     };
 }
