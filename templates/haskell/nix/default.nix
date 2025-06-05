@@ -1,14 +1,5 @@
 { lib, haskellPackages }:
 let
-  inherit (builtins) attrValues;
-
-  # If you ever get version mismatches, add cabal2nix overrides here.
-  pkgs' = haskellPackages.override {
-    overrides = final: _: {
-      # directory = final.callPackage ./generated/directory.nix { };
-    };
-  };
-
   name = "haskell";
 
   inherit (lib) fileset;
@@ -17,6 +8,14 @@ let
     (fileset.maybeMissing ../app)
     (fileset.maybeMissing ../src)
   ];
+
+  inherit (builtins) attrValues;
+  pkgs' = haskellPackages.override {
+    # If you ever get version mismatches, add cabal2nix overrides here.
+    overrides = final: _: {
+      # directory = final.callPackage ./generated/directory.nix { };
+    };
+  };
 in
 haskellPackages.mkDerivation {
   pname = name;
