@@ -41,7 +41,7 @@
       devShells = forSystems (
         pkgs:
         let
-          f = builtins.mapAttrs (_: v: pkgs.callPackage v { });
+          f = builtins.mapAttrs (_: v: import v { inherit pkgs; });
         in
         f {
           default = ./shells/nix.nix;

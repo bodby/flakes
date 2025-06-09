@@ -1,14 +1,19 @@
 {
-  mkShellNoCC,
-  luajit,
-  lua-language-server,
-  stylua,
+  pkgs ? import <nixpkgs> { },
 }:
-mkShellNoCC {
-  name = "lua";
-  packages = [
-    luajit
-    lua-language-server
-    stylua
-  ];
-}
+pkgs.callPackage (
+  {
+    mkShellNoCC,
+    luajit,
+    lua-language-server,
+    stylua,
+  }:
+  mkShellNoCC {
+    name = "lua";
+    packages = [
+      luajit
+      lua-language-server
+      stylua
+    ];
+  }
+) { }

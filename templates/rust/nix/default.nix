@@ -1,24 +1,29 @@
-{ lib, rustPlatform }:
-let
-  toml = (lib.importTOML ../Cargo.toml).package;
+{
+  pkgs ? import <nixpkgs> { },
+}:
+pkgs.callPackage (
+  { lib, rustPlatform }:
+  let
+    toml = (lib.importTOML ../Cargo.toml).package;
 
-  inherit (lib) fileset;
-  sources = fileset.unions [
-    ../Cargo.toml
-    ../Cargo.lock
-    (fileset.maybeMissing ../build.rs)
-  ];
-in
-rustPlatform.buildRustPackage {
-  inherit (toml) version;
-  pname = toml.name;
+    inherit (lib) fileset;
+    sources = fileset.unions [
+      ../Cargo.toml
+      ../Cargo.lock
+      (fileset.maybeMissing ../build.rs)
+    ];
+  in
+  rustPlatform.buildRustPackage {
+    inherit (toml) version;
+    pname = toml.name;
 
-  src = fileset.toSource {
-    root = ../.;
-    fileset = fileset.intersection (fileset.fileFilter (
-      file: !file.hasExt "nix" && file.name != "flake.lock"
-    ) ../.) sources;
-  };
+    src = fileset.toSource {
+      root = ../.;
+      fileset = fileset.intersection (fileset.fileFilter (
+        file: !file.hasExt "nix" && file.name != "flake.lock"
+      ) ../.) sources;
+    };
 
-  cargoLock.lockFile = ../Cargo.lock;
-}
+    cargoLock.lockFile = ../Cargo.lock;
+  }
+) { }
